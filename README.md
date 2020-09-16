@@ -12,6 +12,8 @@ The root page is used as the controller, and the /stream.html page is used as th
 
 > For now using only Room '1111' only.
 
+> Recommend setting height to 800 while adding stream overlay URL in Browser Source in OBS
+
 ## Development
 
 To run the website locally, either open `index.html` in Firefox  
