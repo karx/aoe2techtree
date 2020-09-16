@@ -14,6 +14,9 @@ The root page is used as the controller, and the /stream.html page is used as th
 
 > Recommend setting height to 800 while adding stream overlay URL in Browser Source in OBS
 
+* Does not work perfectly for unique Technologies and Units. Kindof important P0
+* Civ opacity sometimes does not work
+
 ## Development
 
 To run the website locally, either open `index.html` in Firefox  
