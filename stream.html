@@ -8,12 +8,20 @@
     <title>Age of Empires II Tech Tree</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap">
+    <style>
+        
+        #root {
+            height: 0px;
+            width: 0px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
 <div id="container">
     <div id="wrapper">
-        <div id="metainfo">
+        <div id="metainfoX">
             <div id="civinfo">
                 <div id="civtitle">
                     <select id="civselect" onchange="loadCiv()">
@@ -285,6 +293,8 @@
         window.onhashchange = function () {
             updateCivselectValue();
         };
+        displayHelp('unit_5');
+
     });
 
     function updateCivselectValue() {
@@ -391,8 +401,7 @@
     }
 
     function displayHelp(caretId) {
-        updateSelect(caretId);
-        console.log({caretId});
+        console.log("Displaying :" + caretId);
         focusedNodeId = caretId;
         let helptextContent = document.getElementById("helptext__content");
         let helptextAdvancedStats = document.getElementById("helptext__advanced_stats");
@@ -409,7 +418,6 @@
     }
 
     function hideHelp() {
-        updateSelect("none");
         focusedNodeId = null;
         const helptext = document.getElementById("helptext");
         helptext.style.display = "none";
@@ -419,9 +427,9 @@
     function positionHelptext(caret) {
         const helptext = document.getElementById("helptext");
         helptext.style.display = "block";
-        positionHelptextBelow(caret, helptext)
-        || positionHelptextAbove(caret, helptext)
-        || positionHelptextToLeftOrRight(caret, helptext);
+        // positionHelptextBelow(caret, helptext)
+        // || positionHelptextAbove(caret, helptext)
+        // || positionHelptextToLeftOrRight(caret, helptext);
     }
 
     function positionHelptextBelow(caret, helptext) {
@@ -779,17 +787,27 @@
         }
         document.getElementById('key__label').innerText = data.strings[data.tech_tree_strings["Key"]];
     }
+    
 
-    
-    function updateSelect(selection) {
-    
-    console.log({selection});
-    db.collection(`/aoeTechTree/`)
-    .doc('1111')
-    .set({
-        selection: selection
-    });
+    async function init() {
+    // let bid = await getBroadcasterId();
+    // let sid = await getScoreboardId();
+    // if (bid && sid) {
+        db.collection(`/aoeTechTree/`)
+        .doc('1111')
+        .onSnapshot((scoreboard) => {
+            let data = scoreboard.data();
+            if(data.selection) {
+                if(data.selection === "none") {
+                    hideHelp();
+                } else {
+                    displayHelp(data.selection);
+                }
+            }
+        });
     }
+    init();
+
 </script>
 </body>
 </html>

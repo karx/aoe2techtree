@@ -135,7 +135,12 @@ a, a:hover, a:visited, a:active {
     overflow: auto;
     height: 100vh;
 }
+#metainfoX {
+    height: 0px;
+    width: 0px;
+    overflow: hidden;
 
+}
 #civselect {
     font-size: 18px;
     font-weight: bold;
